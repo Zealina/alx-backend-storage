@@ -13,18 +13,8 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    @property
-    def redis(self) -> redis.Redis:
-        """Getter"""
-        return self._redis
-
-    @redis.setter
-    def redis(self, value) -> None:
-        """Setter"""
-        self._redis = value
-
     def store(self, data: Union[str, float, int, bytes]) -> str:
         """Create a key to store data"""
         key = str(uuid4())
-        self.redis.set(key, data)
+        self._redis.set(key, data)
         return key
