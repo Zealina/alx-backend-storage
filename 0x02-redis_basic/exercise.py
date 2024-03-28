@@ -7,10 +7,10 @@ from typing import Optional, Union, Callable
 from functools import wraps
 
 
-def count_calls(method: Callable):
+def count_calls(method: Callable) -> Callable:
     """Custom Wrapper"""
     @wraps(method)
-    def wrapper(self, *args, **kwargs):
+    def wrapper(self, *args, **kwargs) -> Callable:
         """Wrapper function."""
         key = method.__qualname__
         self._redis.incr(key)
